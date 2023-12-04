@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LCD;
 
 namespace Opdracht_ICT
 {
@@ -22,9 +23,11 @@ namespace Opdracht_ICT
     public partial class MainWindow : Window
     {
         SerialPort _serialPort;
+        tekstLCD LCD1;
         public MainWindow()
         {
             InitializeComponent();
+            LCD1 = new tekstLCD();
             _serialPort = new SerialPort();
 
             cbxComPorts.Items.Add("None");
@@ -32,10 +35,7 @@ namespace Opdracht_ICT
                 cbxComPorts.Items.Add(s);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void cbxComPorts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -53,9 +53,17 @@ namespace Opdracht_ICT
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+       private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string text = TextBox.Text;
+            LCD1.Tekst=text;
 
+            _serialPort.WriteLine(LCD1.Tekst);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _serialPort.Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Opdracht_ICT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,7 +21,7 @@
 
         <GroupBox Header="Display" Grid.Row="1">
             <StackPanel>
-                <TextBox  TextWrapping="Wrap" Text="..." Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged"/>
+                <TextBox Name="TextBox" TextWrapping="Wrap" Text="..." Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged"/>
                 <Button Name="Button" Content="send" Width="50" Height="20" Margin="5" HorizontalAlignment="Left" Click="Button_Click"/>
             </StackPanel>
             
