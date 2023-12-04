@@ -1,0 +1,4 @@
+C:\Users\terry\OneDrive\Documenten\ICT opdracht\Opdracht_ICT\Opdracht_ICT\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\terry\OneDrive\Documenten\ICT opdracht\Opdracht_ICT\Opdracht_ICT\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\terry\OneDrive\Documenten\ICT opdracht\Opdracht_ICT\Opdracht_ICT\obj\Debug\net6.0-windows\Opdracht_ICT_MarkupCompile.cache
+C:\Users\terry\OneDrive\Documenten\ICT opdracht\Opdracht_ICT\Opdracht_ICT\obj\Debug\net6.0-windows\Opdracht_ICT_MarkupCompile.lref
