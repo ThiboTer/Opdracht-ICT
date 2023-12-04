@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "w73KlwmJbCk/YzfpBpRQgUoSn02GR1wjKxR8v/A0sfQesPLAwG24Oq2ixRcFL0YV0GGlWlU3R5y28JpXsHAAyw==",
+  "dgSpecHash": "aRE16o0shbIawhl1575/sIIQpyPgsCo66DGer4hAWtr/XHb0nw3zCn1Gkysbz/rGPU8TBd4RXycrwLPln3OJ8Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\terry\\OneDrive\\Documenten\\ICT opdracht\\Opdracht_ICT\\Opdracht_ICT\\Opdracht_ICT.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.native.system.io.ports\\8.0.0\\runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\8.0.0\\runtime.osx-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
+    "C:\\Users\\terry\\.nuget\\packages\\system.io.ports\\8.0.0\\system.io.ports.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

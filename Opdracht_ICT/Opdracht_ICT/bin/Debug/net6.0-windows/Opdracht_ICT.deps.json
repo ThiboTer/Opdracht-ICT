@@ -6,6 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "Opdracht_ICT/1.0.0": {
+        "dependencies": {
+          "System.IO.Ports": "8.0.0"
+        },
+        "runtime": {
+          "Opdracht_ICT.dll": {}
+        }
+      },
       "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
         "runtimeTargets": {
           "runtimes/linux-arm/native/libSystem.IO.Ports.Native.so": {
@@ -88,6 +96,11 @@
     }
   },
   "libraries": {
+    "Opdracht_ICT/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "runtime.linux-arm.runtime.native.System.IO.Ports/8.0.0": {
       "type": "package",
       "serviceable": true,
