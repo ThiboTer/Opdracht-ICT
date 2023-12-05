@@ -23,6 +23,7 @@
             <StackPanel>
                 <TextBox Name="TextBox" TextWrapping="Wrap" Text="..." Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" />
                 <Button Name="Button" Content="send" Width="50" Height="20" Margin="5" HorizontalAlignment="Left" Click="Button_Click"/>
+                <Label Name="foutmelding" Content="Je mag maximum 16 karakters gebruiken!" Foreground="Red" Visibility="Hidden"/>
             </StackPanel>
             
 

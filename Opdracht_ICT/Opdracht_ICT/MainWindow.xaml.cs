@@ -57,8 +57,15 @@ namespace Opdracht_ICT
         {
             string text = TextBox.Text;
             LCD1.Tekst=text;
-
-            _serialPort.WriteLine(LCD1.Tekst);
+            if (LCD1.lengte == false)
+            {
+                _serialPort.WriteLine(LCD1.Tekst.PadRight(16, ' '));
+                foutmelding.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                foutmelding.Visibility = Visibility.Visible;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

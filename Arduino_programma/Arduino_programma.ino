@@ -1,18 +1,14 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-// Adres van het LCD-scherm
-int lcdAddress = 0x27;
 
-// Aantal kolommen en rijen van het LCD-scherm
-int lcdColumns = 16;
-int lcdRows = 2;
+int Address = 0x27;
 
-LiquidCrystal_I2C lcd(lcdAddress, lcdColumns, lcdRows);
+LiquidCrystal_I2C lcd(Address, 16, 2);
 
 void setup() {
   Serial.begin(9600);
-  lcd.begin(lcdColumns, lcdRows);
+  lcd.begin(16, 2);
   lcd.backlight(); 
   lcd.setCursor(0, 0);
   lcd.print("Thibo Terryn");
@@ -23,6 +19,9 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     String receivedText = Serial.readString();
+    // laatste karakter van string weg doen anders krijg je raar teken...
+    receivedText = receivedText.substring(0, receivedText.length() - 1);
+    
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print(receivedText);
