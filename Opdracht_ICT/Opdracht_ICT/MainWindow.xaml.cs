@@ -28,15 +28,15 @@ namespace Opdracht_ICT
         
 
         SerialPort _serialPort;
-        tekstLCD LCD1;
-        tekstLCD LCD2;
+        tekstLCD lijn1;
+        tekstLCD lijn2;
         private bool isButtonEnabled = true;
         DispatcherTimer buttonTimer;
         public MainWindow()
         {
             InitializeComponent();
-            LCD1 = new tekstLCD();
-            LCD2 = new tekstLCD();
+            lijn1 = new tekstLCD();
+            lijn2 = new tekstLCD();
 
             
             _serialPort = new SerialPort();
@@ -74,7 +74,7 @@ namespace Opdracht_ICT
                     TextBox2.IsEnabled = true;
                     Button.IsEnabled = true;
                     Remove.IsEnabled = true;
-                    tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+                    tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
                 }
                 else 
                 {
@@ -94,9 +94,9 @@ namespace Opdracht_ICT
             foutmelding.Visibility = Visibility.Collapsed;
             string text = TextBox.Text;
             string text2 = TextBox2.Text;
-            LCD1.Tekst=text;
-            LCD2.Tekst=text2;
-            tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+            lijn1.Tekst=text;
+            lijn2.Tekst=text2;
+            tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
             isButtonEnabled = false;
                 buttonTimer.Start();
             }
@@ -110,11 +110,11 @@ namespace Opdracht_ICT
             if (isButtonEnabled)
             {
                 foutmelding.Visibility = Visibility.Collapsed;
-                LCD1.VerwijderTekst();
-                LCD2.VerwijderTekst();
+                lijn1.VerwijderTekst();
+                lijn2.VerwijderTekst();
                 TextBox.Text = "";
                 TextBox2.Text = "";
-                tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+                tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
                 isButtonEnabled = false;
                 buttonTimer.Start();
             }
