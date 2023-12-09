@@ -20,10 +20,13 @@ void loop() {
   if (Serial.available() > 0) {
     String receivedText = Serial.readString();
     // laatste karakter van string weg doen anders krijg je raar teken...
-    receivedText = receivedText.substring(0, receivedText.length() - 1);
+    //receivedText = receivedText.substring(0, receivedText.length() - 1);
     
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print(receivedText);
+    lcd.print(receivedText.substring(0, 16));
+
+    lcd.setCursor(0, 1);
+    lcd.print(receivedText.substring(17));
   }
 }

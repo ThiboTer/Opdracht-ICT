@@ -9,34 +9,25 @@ namespace LCD
 {
     class tekstLCD
     {
+		
+
 		private string tekst;
 
 		public string Tekst
 		{
 			get { return tekst; }
-			set 
-			{
-				if (value.Length <= 16)
-				{
-					tekst= value.PadRight(16,' ');
-                    Error(false);
-                }
-				if (value.Length > 16) 
-				{
-					tekst = value;
-					Error(true);
-				}
-				else
-				{ tekst = value;}
-			}
+			set {tekst = value;}
 		}
 
-        public bool lengte { get; set; }
+        public tekstLCD()
+        {
+            tekst = "voer tekst in.";
+        }
 
-        private void Error(bool status)
-		{ lengte = status; }
+        public void VerwijderTekst()
+        {
+            tekst = string.Empty;
+        }
 
-
-
-	}
+    }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using LCD;
 
 namespace Opdracht_ICT
@@ -22,17 +23,38 @@ namespace Opdracht_ICT
     /// </summary>
     public partial class MainWindow : Window
     {
+        // instelen breedte LCD display
+        public int LCDbreedte = 16;
+        
+
         SerialPort _serialPort;
         tekstLCD LCD1;
+        tekstLCD LCD2;
+        private bool isButtonEnabled = true;
+        DispatcherTimer buttonTimer;
         public MainWindow()
         {
             InitializeComponent();
             LCD1 = new tekstLCD();
+            LCD2 = new tekstLCD();
+
+            
             _serialPort = new SerialPort();
 
             cbxComPorts.Items.Add("None");
             foreach (string s in SerialPort.GetPortNames())
                 cbxComPorts.Items.Add(s);
+
+            TextBox.IsEnabled = false;
+            TextBox2.IsEnabled = false;
+            Button.IsEnabled = false;
+            Remove.IsEnabled = false;
+
+            buttonTimer = new DispatcherTimer();
+            buttonTimer.Tick += ButtonTimer_Tick;
+            buttonTimer.Interval = TimeSpan.FromSeconds(3);
+
+            
         }
 
        
@@ -48,6 +70,18 @@ namespace Opdracht_ICT
                 {
                     _serialPort.PortName = cbxComPorts.SelectedItem.ToString();
                     _serialPort.Open();
+                    TextBox.IsEnabled = true;
+                    TextBox2.IsEnabled = true;
+                    Button.IsEnabled = true;
+                    Remove.IsEnabled = true;
+                    tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+                }
+                else 
+                {
+                    TextBox.IsEnabled = false;
+                    TextBox2.IsEnabled = false;
+                    Button.IsEnabled = false;
+                    Remove.IsEnabled = false;
                 }
             }
 
@@ -55,22 +89,75 @@ namespace Opdracht_ICT
 
        private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (isButtonEnabled) 
+            { 
+            foutmelding.Visibility = Visibility.Collapsed;
             string text = TextBox.Text;
+            string text2 = TextBox2.Text;
             LCD1.Tekst=text;
-            if (LCD1.lengte == false)
+            LCD2.Tekst=text2;
+            tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+            isButtonEnabled = false;
+                buttonTimer.Start();
+            }
+           else
+            { foutmelding.Visibility = Visibility.Visible; }
+
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (isButtonEnabled)
             {
-                _serialPort.WriteLine(LCD1.Tekst.PadRight(16, ' '));
                 foutmelding.Visibility = Visibility.Collapsed;
+                LCD1.VerwijderTekst();
+                LCD2.VerwijderTekst();
+                TextBox.Text = "";
+                TextBox2.Text = "";
+                tekstNaarLCD(LCD1.Tekst, LCD2.Tekst);
+                isButtonEnabled = false;
+                buttonTimer.Start();
             }
             else
-            {
-                foutmelding.Visibility = Visibility.Visible;
-            }
+            { foutmelding.Visibility = Visibility.Visible; }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _serialPort.Close();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox.MaxLength = LCDbreedte;
+            size(TextBox,size1);
+        }
+
+        private void TextBox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox2.MaxLength = LCDbreedte;
+            size(TextBox2, size2);
+        }
+
+        private void size( TextBox box ,Label test)
+        {
+            string tekst =box.Text;
+            int teller = tekst.Length;
+            test.Content = teller+"/"+ LCDbreedte;
+        }
+
+        private void ButtonTimer_Tick(object sender, EventArgs e)
+        {
+          isButtonEnabled = true;
+          buttonTimer.Stop();
+        }
+
+        private void tekstNaarLCD(string lijn1, string lijn2)
+        {
+            _serialPort.WriteLine(lijn1.PadRight(LCDbreedte, ' '));
+            _serialPort.WriteLine(lijn2.PadRight(LCDbreedte, ' '));
+        }
+
+       
     }
 }

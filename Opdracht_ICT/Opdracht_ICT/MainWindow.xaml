@@ -5,13 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Opdracht_ICT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
+        Title="LCD" SizeToContent="Height" Width="500" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Header="Selecteer com poort" Grid.Row="0">
+        <StackPanel Grid.Row="0">
+            <Label Content="Thibo Terryn"/>
+            <Label Content="Opdracht ICT: Aansturen van LCD via seriële comunicatie"/>
+        </StackPanel>
+        
+        
+        <GroupBox Header="Selecteer com poort" Grid.Row="1">
             <StackPanel>
                 <ComboBox Name="cbxComPorts" Margin="10" Width="120" HorizontalAlignment="Left"
                 SelectionChanged="cbxComPorts_SelectionChanged"></ComboBox>
@@ -19,15 +27,34 @@
 
         </GroupBox>
 
-        <GroupBox Header="Display" Grid.Row="1">
+        <GroupBox Header="Display" Grid.Row="2">
             <StackPanel>
-                <TextBox Name="TextBox" TextWrapping="Wrap" Text="..." Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" />
-                <Button Name="Button" Content="send" Width="50" Height="20" Margin="5" HorizontalAlignment="Left" Click="Button_Click"/>
-                <Label Name="foutmelding" Content="Je mag maximum 16 karakters gebruiken!" Foreground="Red" Visibility="Hidden"/>
-            </StackPanel>
-            
+                <Label Content="lijn 1:"/>
+                <WrapPanel>
+                    <TextBox Name="TextBox" MaxLength="16" TextWrapping="Wrap"  Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged" />
+                    <Label Name="size1" Content="0/16" FontSize="10"/>
+                </WrapPanel>
 
+                <Label Content="lijn 2:"/>
+
+
+                <WrapPanel>
+                    <TextBox Name="TextBox2" MaxLength="16"  TextWrapping="Wrap"  Width="120"  Height="20" Margin="5" HorizontalAlignment="Left" TextChanged="TextBox2_TextChanged" />
+                    <Label Name="size2" Content="0/16" FontSize="10"/>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Button Name="Button" Content="stuur" Width="60" Height="20" Margin="5" HorizontalAlignment="Left" Click="Button_Click"/>
+                    <Button Name="Remove" Content="verwijder" Width="60" Height="20" Margin="5" HorizontalAlignment="Left" Click="Remove_Click"/>
+                </WrapPanel>
+                
+                
+                <Label Name="foutmelding" Content="Je mag maximum 1 keer sturen per 3seconden!" Foreground="Red" Visibility="Hidden"/>
+            </StackPanel>
         </GroupBox>
+        <StackPanel Grid.Row="3">
+            <Label Content="Vives 1ICa"/>
+        </StackPanel>
 
     </Grid>
 </Window>
