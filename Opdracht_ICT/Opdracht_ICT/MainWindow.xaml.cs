@@ -25,24 +25,24 @@ namespace Opdracht_ICT
     {
         // instelen breedte LCD display
         public int LCDbreedte = 16;
-        
+
+        private bool isButtonEnabled = true;
+        private bool clockButton = false;
+        private string laatsetijd;
 
         SerialPort _serialPort;
         tekstLCD lijn1;
         tekstLCD lijn2;
-        private bool isButtonEnabled = true;
-        private bool clockButton=false;
-        private string laatsetijd;
         DispatcherTimer buttonTimer;
+        DispatcherTimer clockTimer;
         public MainWindow()
         {
             InitializeComponent();
+
             lijn1 = new tekstLCD();
             lijn2 = new tekstLCD();
 
-            
             _serialPort = new SerialPort();
-
             cbxComPorts.Items.Add("None");
             foreach (string s in SerialPort.GetPortNames())
                 cbxComPorts.Items.Add(s);
@@ -57,7 +57,7 @@ namespace Opdracht_ICT
             buttonTimer.Tick += ButtonTimer_Tick;
             buttonTimer.Interval = TimeSpan.FromSeconds(3);
 
-            DispatcherTimer clockTimer = new DispatcherTimer();
+            clockTimer = new DispatcherTimer();
             clockTimer.Tick += ClockTimer_Tick;
             clockTimer.Interval = TimeSpan.FromSeconds(1);
             clockTimer.Start();
@@ -101,19 +101,18 @@ namespace Opdracht_ICT
         {
             if (isButtonEnabled) 
             {
-            clockButton = false;
-            foutmelding.Visibility = Visibility.Collapsed;
-            string text = TextBox.Text;
-            string text2 = TextBox2.Text;
-            lijn1.Tekst=text;
-            lijn2.Tekst=text2;
-            tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
-            isButtonEnabled = false;
+                clockButton = false;
+                foutmelding.Visibility = Visibility.Collapsed;
+                string text = TextBox.Text;
+                string text2 = TextBox2.Text;
+                lijn1.Tekst=text;
+                lijn2.Tekst=text2;
+                tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
+                isButtonEnabled = false;
                 buttonTimer.Start();
             }
            else
-            { foutmelding.Visibility = Visibility.Visible; }
-
+                foutmelding.Visibility = Visibility.Visible; 
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -131,25 +130,23 @@ namespace Opdracht_ICT
                 buttonTimer.Start();
             }
             else
-            { foutmelding.Visibility = Visibility.Visible; }
+                foutmelding.Visibility = Visibility.Visible; 
         }
 
         private void clock_Click(object sender, RoutedEventArgs e)
         {
             if (isButtonEnabled)
             {
-             clockButton = true;
-
-             lijn1.UpdateDateTime();
-             lijn2.UpdateDateTime();
-             laatsetijd = lijn1.Uur;
-             tekstNaarLCD(lijn1.Uur, lijn2.Datum);
-
-            isButtonEnabled = false;
-            buttonTimer.Start();
+                clockButton = true;
+                lijn1.UpdateDateTime();
+                lijn2.UpdateDateTime();
+                laatsetijd = lijn1.Uur;
+                tekstNaarLCD(lijn1.Uur, lijn2.Datum);
+                isButtonEnabled = false;
+                buttonTimer.Start();
             }
             else
-            { foutmelding.Visibility = Visibility.Visible; }
+                foutmelding.Visibility = Visibility.Visible; 
         
         }
 
@@ -195,8 +192,8 @@ namespace Opdracht_ICT
 
         private void ButtonTimer_Tick(object sender, EventArgs e)
         {
-          isButtonEnabled = true;
-          buttonTimer.Stop();
+            isButtonEnabled = true;
+            buttonTimer.Stop();
         }
 
         private void tekstNaarLCD(string lijn1, string lijn2)

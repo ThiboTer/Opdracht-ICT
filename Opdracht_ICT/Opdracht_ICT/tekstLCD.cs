@@ -34,17 +34,16 @@ namespace LCD
         }
 
 
+        public tekstLCD()
+        {
+            tekst = "voer tekst in.";
+        }
 
         public void UpdateDateTime()
         {
             uur = DateTime.Now;
             datum = DateTime.Now;   
-        }
-
-        public tekstLCD()
-        {
-            tekst = "voer tekst in.";
-        }
+        } 
 
         public void VerwijderTekst()
         {
