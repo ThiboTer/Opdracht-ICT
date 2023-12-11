@@ -3,12 +3,15 @@
 
 
 int Address = 0x27;
+int breedte = 16;
+int lijnen = 2;
 
-LiquidCrystal_I2C lcd(Address, 16, 2);
+LiquidCrystal_I2C lcd(Address, breedte, lijnen);
 
-void setup() {
+void setup() 
+{
   Serial.begin(9600);
-  lcd.begin(16, 2);
+  lcd.begin(breedte, lijnen);
   lcd.backlight(); 
   lcd.setCursor(0, 0);
   lcd.print("Thibo Terryn");
@@ -16,17 +19,17 @@ void setup() {
   lcd.print("Opdracht ICT");
 }
 
-void loop() {
-  if (Serial.available() > 0) {
+void loop() 
+{
+  if (Serial.available() > 0) 
+  {
     String receivedText = Serial.readString();
-    // laatste karakter van string weg doen anders krijg je raar teken...
-    //receivedText = receivedText.substring(0, receivedText.length() - 1);
     
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print(receivedText.substring(0, 16));
+    lcd.print(receivedText.substring(0, breedte));
 
     lcd.setCursor(0, 1);
-    lcd.print(receivedText.substring(17));
+    lcd.print(receivedText.substring(breedte+1));
   }
 }
