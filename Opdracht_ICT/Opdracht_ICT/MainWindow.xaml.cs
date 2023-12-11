@@ -31,6 +31,8 @@ namespace Opdracht_ICT
         tekstLCD lijn1;
         tekstLCD lijn2;
         private bool isButtonEnabled = true;
+        private bool clockButton=false;
+        private string laatsetijd;
         DispatcherTimer buttonTimer;
         public MainWindow()
         {
@@ -49,12 +51,18 @@ namespace Opdracht_ICT
             TextBox2.IsEnabled = false;
             Button.IsEnabled = false;
             Remove.IsEnabled = false;
+            clock.IsEnabled = false;
 
             buttonTimer = new DispatcherTimer();
             buttonTimer.Tick += ButtonTimer_Tick;
             buttonTimer.Interval = TimeSpan.FromSeconds(3);
 
-            
+            DispatcherTimer clockTimer = new DispatcherTimer();
+            clockTimer.Tick += ClockTimer_Tick;
+            clockTimer.Interval = TimeSpan.FromSeconds(1);
+            clockTimer.Start();
+
+
         }
 
        
@@ -74,6 +82,7 @@ namespace Opdracht_ICT
                     TextBox2.IsEnabled = true;
                     Button.IsEnabled = true;
                     Remove.IsEnabled = true;
+                    clock.IsEnabled = true;
                     tekstNaarLCD(lijn1.Tekst, lijn2.Tekst);
                 }
                 else 
@@ -82,6 +91,7 @@ namespace Opdracht_ICT
                     TextBox2.IsEnabled = false;
                     Button.IsEnabled = false;
                     Remove.IsEnabled = false;
+                    clock.IsEnabled = false;
                 }
             }
 
@@ -90,7 +100,8 @@ namespace Opdracht_ICT
        private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (isButtonEnabled) 
-            { 
+            {
+            clockButton = false;
             foutmelding.Visibility = Visibility.Collapsed;
             string text = TextBox.Text;
             string text2 = TextBox2.Text;
@@ -109,6 +120,7 @@ namespace Opdracht_ICT
         {
             if (isButtonEnabled)
             {
+                clockButton = false;
                 foutmelding.Visibility = Visibility.Collapsed;
                 lijn1.VerwijderTekst();
                 lijn2.VerwijderTekst();
@@ -120,6 +132,41 @@ namespace Opdracht_ICT
             }
             else
             { foutmelding.Visibility = Visibility.Visible; }
+        }
+
+        private void clock_Click(object sender, RoutedEventArgs e)
+        {
+            if (isButtonEnabled)
+            {
+             clockButton = true;
+
+             lijn1.UpdateDateTime();
+             lijn2.UpdateDateTime();
+             laatsetijd = lijn1.Uur;
+             tekstNaarLCD(lijn1.Uur, lijn2.Datum);
+
+            isButtonEnabled = false;
+            buttonTimer.Start();
+            }
+            else
+            { foutmelding.Visibility = Visibility.Visible; }
+        
+        }
+
+        private void ClockTimer_Tick(object sender, EventArgs e)
+        {
+            
+            if (clockButton)
+            {
+                lijn1.UpdateDateTime();
+                lijn2.UpdateDateTime();
+                if (lijn1.Uur!= laatsetijd) 
+                {
+                    laatsetijd = lijn1.Uur;
+                    tekstNaarLCD(lijn1.Uur, lijn2.Datum); 
+                }
+                
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -47,8 +47,10 @@
                     <Button Name="Button" Content="stuur" Width="60" Height="20" Margin="5" HorizontalAlignment="Left" Click="Button_Click"/>
                     <Button Name="Remove" Content="verwijder" Width="60" Height="20" Margin="5" HorizontalAlignment="Left" Click="Remove_Click"/>
                 </WrapPanel>
-                
-                
+                <Button x:Name="clock" Content="klok" Width="60" Height="20" Margin="5" HorizontalAlignment="Left" Click="clock_Click"/>
+
+
+
                 <Label Name="foutmelding" Content="Je mag maximum 1 keer sturen per 3seconden!" Foreground="Red" Visibility="Hidden"/>
             </StackPanel>
         </GroupBox>

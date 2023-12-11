@@ -19,6 +19,28 @@ namespace LCD
 			set {tekst = value;}
 		}
 
+        private DateTime uur;
+        public string Uur
+        {
+            get { return uur.ToString("HH:mm"); }
+        }
+
+        private DateTime datum;
+
+        public string Datum 
+        {
+            
+            get { return datum.ToString("dd-MM-yyyy"); }
+        }
+
+
+
+        public void UpdateDateTime()
+        {
+            uur = DateTime.Now;
+            datum = DateTime.Now;   
+        }
+
         public tekstLCD()
         {
             tekst = "voer tekst in.";
